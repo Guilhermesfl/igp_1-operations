@@ -15,6 +15,7 @@
 /*
 !/jobs
 !/.gitignore
+!/docker-compose.yaml
 !/*.xml
 
 # Ignore all files in jobs subdirectories except for folders.
