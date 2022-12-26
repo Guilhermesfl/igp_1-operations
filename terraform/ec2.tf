@@ -59,7 +59,7 @@ resource "local_file" "TF_admin_key_pair" {
 }
 
 resource "aws_instance" "jenkins_master_server" {
-  ami           = "ami-0a261c0e5f51090b1"
+  ami           = "ami-06ce824c157700cd2"
   instance_type = "t2.micro"
   security_groups = [ "${aws_security_group.TF_SG.name}" ]
   key_name = aws_key_pair.TF_admin_key_pair.key_name
@@ -70,7 +70,7 @@ resource "aws_instance" "jenkins_master_server" {
 }
 
 resource "aws_instance" "jenkins_slave_server" {
-  ami           = "ami-0a261c0e5f51090b1"
+  ami           = "ami-06ce824c157700cd2"
   instance_type = "t2.micro"
   security_groups = [ "${aws_security_group.TF_SG.name}" ]
   key_name = aws_key_pair.TF_admin_key_pair.key_name
