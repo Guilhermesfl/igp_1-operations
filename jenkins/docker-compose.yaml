@@ -6,6 +6,7 @@ services:
     volumes:
       - jenkins:/var/jenkins_home
       - ./jobs:/var/jenkins_home/jobs:rw
+      - /home/ubuntu/.ssh:/var/jenkins_home/.ssh:rw
     ports:
       - "8080:8080"
       - "5000:5000"

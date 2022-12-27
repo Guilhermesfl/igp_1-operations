@@ -1,6 +1,6 @@
 resource "aws_security_group" "TF_SG" {
-  name        = "IGP - TF Security Group"
-  description = "IGP - TF Security Group"
+  name        = "IGP - TF_SG"
+  description = "IGP - TF_SG"
   vpc_id      = "vpc-9dba61f7"
 
   ingress {
@@ -39,7 +39,7 @@ resource "aws_security_group" "TF_SG" {
   }
 
   tags = {
-    Name = "allow_tls"
+    Name = "TF SG"
   }
 }
 
@@ -56,11 +56,12 @@ resource "aws_key_pair" "TF_admin_key_pair" {
 resource "local_file" "TF_admin_key_pair" {
   content  = tls_private_key.rsa.private_key_pem
   filename = "tfkey"
+  file_permission = "0400"
 }
 
 resource "aws_instance" "jenkins_master_server" {
   ami           = "ami-06ce824c157700cd2"
-  instance_type = "t2.micro"
+  instance_type = "t2.large"
   security_groups = [ "${aws_security_group.TF_SG.name}" ]
   key_name = aws_key_pair.TF_admin_key_pair.key_name
 
@@ -71,7 +72,7 @@ resource "aws_instance" "jenkins_master_server" {
 
 resource "aws_instance" "jenkins_slave_server" {
   ami           = "ami-06ce824c157700cd2"
-  instance_type = "t2.micro"
+  instance_type = "t2.large"
   security_groups = [ "${aws_security_group.TF_SG.name}" ]
   key_name = aws_key_pair.TF_admin_key_pair.key_name
 
