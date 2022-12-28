@@ -80,3 +80,14 @@ resource "aws_instance" "jenkins_slave_server" {
     Name = "Jenkins Slave"
   }
 }
+
+resource "aws_instance" "kubernetes_server" {
+  ami           = "ami-06ce824c157700cd2"
+  instance_type = "t2.large"
+  security_groups = [ "${aws_security_group.TF_SG.name}" ]
+  key_name = aws_key_pair.TF_admin_key_pair.key_name
+
+  tags = {
+    Name = "Kubernetes Server"
+  }
+}
