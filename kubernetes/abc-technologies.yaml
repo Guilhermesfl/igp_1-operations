@@ -16,10 +16,11 @@ spec:
         app: abc-technologies
     spec:
       containers:
-      - name: abc-technologies
-        image: guilhermesfl/abc-technologies-retail:latest
-        ports:
-        - containerPort: 8080
+        - name: abc-technologies
+          image: guilhermesfl/abc-technologies-retail:latest
+          ports:
+            - containerPort: 8080
+
 ---
 kind: Service
 apiVersion: v1
@@ -30,5 +31,4 @@ spec:
   selector:
     app: abc-technologies
   ports:
-  # Default port used by the image
-  - port: 8080
+    - port: 8080
