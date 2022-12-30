@@ -2,7 +2,7 @@
   shell: curl https://raw.githubusercontent.com/Guilhermesfl/igp_1-operations/main/kubernetes/abc-technologies.yaml | kubectl apply -f
 
 - name: "Rollout deploy to apply changes"
-  shell: kubectl rollout restart deploy abc-technologies
+  shell: kubectl rollout restart deploy abc-technologies && sleep 40
 
 - name: "Expose ABC Technologies retail application in port 8080"
   shell: kubectl port-forward service/abc-technologies-service 8080:8080 > port-forward.log 2>&1 &
