@@ -1,0 +1,5 @@
+- name: "Apply Kubernetes configuration from remote repository"
+  shell: curl https://raw.githubusercontent.com/Guilhermesfl/igp_1-operations/main/kubernetes/abc-technologies.yaml | kubectl apply -f - && sleep 10
+
+- name: "Expose ABC Technologies retail application in port 8080"
+  shell: kubectl port-forward service/abc-technologies-service 8080:8080 > port-forward.log 2>&1 &

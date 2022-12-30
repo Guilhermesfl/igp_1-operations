@@ -1,0 +1,5 @@
+127.0.0.1 ansible_connection=local
+
+[kubernetes]
+ec2-3-70-8-77.eu-central-1.compute.amazonaws.com ansible_user=ubuntu
+
