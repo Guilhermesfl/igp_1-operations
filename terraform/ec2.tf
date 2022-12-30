@@ -1,4 +1,9 @@
 resource "aws_security_group" "TF_SG" {
+  lifecycle {
+    ignore_changes = [
+      tags
+    ]
+  }
   name        = "IGP - TF_SG"
   description = "IGP - TF_SG"
   vpc_id      = "vpc-9dba61f7"
@@ -89,5 +94,16 @@ resource "aws_instance" "kubernetes_server" {
 
   tags = {
     Name = "Kubernetes Server"
+  }
+}
+
+resource "aws_instance" "monitoring_server" {
+  ami           = "ami-06ce824c157700cd2"
+  instance_type = "t2.large"
+  security_groups = [ "${aws_security_group.TF_SG.name}" ]
+  key_name = aws_key_pair.TF_admin_key_pair.key_name
+
+  tags = {
+    Name = "Monitoring Server"
   }
 }
