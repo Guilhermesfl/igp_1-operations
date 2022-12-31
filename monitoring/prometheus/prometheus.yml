@@ -1,0 +1,46 @@
+global:
+  scrape_interval: 15s     # Set the scrape interval to every 15 seconds. Default is every 1 minute.
+  evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
+  scrape_timeout: 10s      # is set to the global default (10s).
+
+# A scrape configuration containing exactly one endpoint to scrape:
+scrape_configs:
+  - job_name: "cadvisor"
+    metrics_path: /cadvisor/metrics # defaults to /metrics
+    basic_auth:
+      username: admin
+      password: edureka
+    static_configs:
+      - targets:
+          - host.docker.internal:8888
+        labels:
+          environment: monitoring
+      - targets:
+          - ip-172-31-15-111.eu-central-1.compute.internal:8888
+          - ip-172-31-6-244.eu-central-1.compute.internal:8888
+        labels:
+          environment: jenkins
+      - targets:
+          - ip-172-31-15-223.eu-central-1.compute.internal
+        labels:
+          environment: kubernetes
+
+  - job_name: "node-exporter"
+    metrics_path: /node_exporter/metrics # defaults to /metrics
+    basic_auth:
+      username: admin
+      password: edureka
+    static_configs:
+      - targets:
+          - host.docker.internal:9100
+        labels:
+          environment: monitoring
+      - targets:
+          - ip-172-31-15-111.eu-central-1.compute.internal:9100
+          - ip-172-31-6-244.eu-central-1.compute.internal:9100
+        labels:
+          environment: jenkins
+      - targets:
+          - ip-172-31-15-223.eu-central-1.compute.internal:9100
+        labels:
+          environment: kubernetes
